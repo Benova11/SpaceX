@@ -27,7 +27,7 @@ namespace SpaceX_new
             
             body = BodyFactory.CreateRectangle(world, size.X * pixelToUnit, size.Y * pixelToUnit,1);
             body.BodyType = BodyType.Static;
-            body.CollisionCategories = Category.Cat2;
+            //body.CollisionCategories = Category.Cat2;
             this.Size = size;
             this.texture = texture;
         }

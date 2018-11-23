@@ -17,6 +17,8 @@ namespace SpaceX_new
         Texture2D rocket_Sprite;
         Texture2D land_Sprite;
 
+        KeyboardState prevKeyboardState;
+
         Rocket player;
         Land landingSpot;
 
@@ -69,6 +71,16 @@ namespace SpaceX_new
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Enter) && (!prevKeyboardState.IsKeyDown(Keys.Enter)))
+            {
+                player.Body.BodyType = BodyType.Dynamic;
+            }
+            if (keyboardState.IsKeyDown(Keys.Space))
+            {
+                player.Fly(gameTime);
+             
+            }
 
             world.Step((float)gameTime.ElapsedGameTime.TotalSeconds);
 
@@ -89,5 +101,7 @@ namespace SpaceX_new
 
             base.Draw(gameTime);
         }
+
+
     }
 }
