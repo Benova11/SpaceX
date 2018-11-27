@@ -10,9 +10,17 @@ using Microsoft.Xna.Framework.Input;
 
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics.Joints;
 
 namespace SpaceX_new
 {
+    public enum Movement
+    {
+        Up,
+        Left,
+        Right
+    }
+
     class Rocket
     {
         public const float unitToPixel = 100.0f;
@@ -22,7 +30,8 @@ namespace SpaceX_new
         private Body body;
         private Vector2 size;
         private Texture2D texture;
-        private float speed;
+        private float speed = 700;
+        
 
 
         public Rocket(World world,Vector2 size, Texture2D texture)
@@ -30,7 +39,6 @@ namespace SpaceX_new
             this.size = size;
             body = BodyFactory.CreateRectangle(world, size.X * pixelToUnit, size.Y * pixelToUnit, 1);
             body.BodyType = BodyType.Static;
-            
             //Body.CollisionCategories = Category.Cat1;
             this.texture = texture;
             rand = new Random();
@@ -58,12 +66,16 @@ namespace SpaceX_new
             return (float)(mantissa * exponent);
         }
 
-        public void Fly(GameTime gameTime)
-        {
-            speed += 20.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Position = new Vector2(Position.X , Position.Y - speed);
+            public void Fly(GameTime gameTime)
+            {
+                float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //Position = new Vector2()
+            // Position = new Vector2(Position.X,Position.Y - (speed * dt)); 
+            body.IgnoreGravity = true;
+            Position = new Vector2(Position.X, Position.Y - 2.3f);
             body.Rotation += randRotation() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-        }
+            }
+           
     }
 
 

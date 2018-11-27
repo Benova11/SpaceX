@@ -50,13 +50,13 @@ namespace SpaceX_new
             rocket_Sprite = Content.Load<Texture2D>("rocket_body2");
             land_Sprite = Content.Load<Texture2D>("HUD");
 
-            world = new World(new Vector2(0,9.8f));
+            world = new World(new Vector2(0,1.8f));
 
             player = new Rocket(world, new Vector2(rocket_Sprite.Width, rocket_Sprite.Height), rocket_Sprite);
             landingSpot = new Land(world, new Vector2(land_Sprite.Width, land_Sprite.Height), land_Sprite);
 
-            player.Position = new Vector2(GraphicsDevice.Viewport.Width / 2.0f, GraphicsDevice.Viewport.Height-600);
-            landingSpot.Position = new Vector2(GraphicsDevice.Viewport.Width / 2.0f, GraphicsDevice.Viewport.Height);
+            player.Position = new Vector2(GraphicsDevice.Viewport.Width / 2.0f, GraphicsDevice.Viewport.Height-590);
+            landingSpot.Position = new Vector2(GraphicsDevice.Viewport.Width / 2.0f, GraphicsDevice.Viewport.Height-30);
 
         }
 
@@ -76,11 +76,13 @@ namespace SpaceX_new
             {
                 player.Body.BodyType = BodyType.Dynamic;
             }
-            if (keyboardState.IsKeyDown(Keys.Space))
-            {
-                player.Fly(gameTime);
-             
-            }
+             if (keyboardState.IsKeyDown(Keys.Space))
+             {
+                 player.Fly(gameTime);
+
+             }
+            
+            
 
             world.Step((float)gameTime.ElapsedGameTime.TotalSeconds);
 
